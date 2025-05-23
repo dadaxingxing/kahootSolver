@@ -31,7 +31,7 @@ def kahoot_bot():
             
 
             # The screen part to capture
-            monitor = {"top": y1, "left": x1, "width": y2 - y1, "height": x2 - x1}
+            monitor = {"top": y1, "left": x1, "width": x2 - x1, "height": y2 - y1}
             output = f"window{key}.png"
 
             # Grab the 
