@@ -27,14 +27,14 @@ def kahoot_bot():
         
         for key, value in question_and_answers.items():
             
-            x1, y1, x2, y2 = value[0] * width, value[1] * height, value[2] * width, value[3] * height
+            x1, y1, x2, y2 = int(value[0] * width), int(value[1] * height), int(value[2] * width), int(value[3] * height)
             
 
             # The screen part to capture
             monitor = {"top": y1, "left": x1, "width": y2 - y1, "height": x2 - x1}
-            output = "window.png"
+            output = f"window{key}.png"
 
-            # Grab the data
+            # Grab the 
             sct_img = sct.grab(monitor)
 
             # Save to the picture file
@@ -48,5 +48,5 @@ def kahoot_bot():
 # )
 # print(response.text)
 
-keyboard.add_hotkey('ctrl+shift+t', kahoot_bot)
+keyboard.add_hotkey('alt+shift+t', kahoot_bot)
 keyboard.wait()
