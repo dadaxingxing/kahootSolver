@@ -1,4 +1,3 @@
-from google import genai
 import os
 from dotenv import load_dotenv
 import mss 
@@ -6,18 +5,18 @@ import mss.tools
 import keyboard
 import pyautogui
 from PIL import Image
+import openai
+from PIL import Image
+from io import BytesIO
+import base64
+
 
 load_dotenv()
 
 API_key = os.getenv('API_KEY')
-client = genai.Client(api_key=API_key)
+openai.api_key = API_key
 
 def gpt_ans(question):
-
-# response = client.models.generate_content(
-#     model="gemini-2.0-flash", contents="hello."
-# )
-# print(response.text)
     pass
 
 def click_button(ans):
@@ -58,8 +57,14 @@ def kahoot_bot():
     monitor = {"left": 0, "top": 0, "width": width, "height": height}
     with mss.mss() as sct:
         sct_img = sct.grab(monitor)
-        output = f"window_full.png"
-        mss.tools.to_png(sct_img.rgb, sct_img.size, output=output)
+        img = Image.frombytes('RGB', sct_img.size, sct_img.rgb)
+
+        buffer = BytesIO()
+        img.save(buffer, format='PNG')
+        base64_img = base64.b64encode(buffer.getvalue()).decode('utf-8')
+        
+        # output = f"window_full.png"
+        # mss.tools.to_png(sct_img.rgb, sct_img.size, output=output)
 
 
 keyboard.add_hotkey('alt+shift+t', kahoot_bot)
