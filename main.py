@@ -32,8 +32,12 @@ def gpt_ans(question):
 
     return response['choices'][0]['message']['content']
 
-def click_button(ans):
-    pass
+def click_button(ans, locations):
+    width, height = pyautogui.size()
+    x1, y1, x2, y2 = locations[ans]
+
+    x, y = int((x2 - x1)/2 * width), int((y2 - y1) / 2 * height)
+    pyautogui.click(x, y)
 
 def kahoot_bot():
 
@@ -44,23 +48,6 @@ def kahoot_bot():
         3: (0.042, 0.82, 0.458, 0.92),
         4: (0.54, 0.82, .94, 0.92),
     }
-
-
-
-    # res = ''
-    # with mss.mss() as sct:
-        
-    #     for key, value in question_and_answers.items():
-            
-    #         x1, y1, x2, y2 = int(value[0] * width), int(value[1] * height), int(value[2] * width), int(value[3] * height)
-            
-
-    #         # The screen part to capture
-    #         monitor = {"top": y1, "left": x1, "width": x2 - x1, "height": y2 - y1}
-    #         sct_img = sct.grab(monitor)
-
-    #         # img = Image.frombytes('RGB', sct_img.size, sct_img.rgb)
-    #         # Save to the picture file
 
     width, height = pyautogui.size()
     # full screen monitor
@@ -77,8 +64,22 @@ def kahoot_bot():
     
 
     ans = gpt_ans(img_url)
-    click_button(ans)
+    click_button(ans, question_and_answers)
 
+    # res = ''
+    # with mss.mss() as sct:
+        
+    #     for key, value in question_and_answers.items():
+            
+    #         x1, y1, x2, y2 = int(value[0] * width), int(value[1] * height), int(value[2] * width), int(value[3] * height)
+            
+
+    #         # The screen part to capture
+    #         monitor = {"top": y1, "left": x1, "width": x2 - x1, "height": y2 - y1}
+    #         sct_img = sct.grab(monitor)
+
+    #         # img = Image.frombytes('RGB', sct_img.size, sct_img.rgb)
+    #         # Save to the picture file
 
 keyboard.add_hotkey('alt+shift+t', kahoot_bot)
 keyboard.wait()
