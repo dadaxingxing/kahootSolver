@@ -23,8 +23,14 @@ def gpt_ans(question):
             {
             'role': 'user',
             'content': [
-                {'type': 'text', 'text': "You are a helpful assistant specialized in answering multiple-choice questions who only responds with the button number corresponding to the most likely answer do not respond with words only a integer. You'll do this even if the question involves content you can't analyze, such as videos or images. If you cannot answer the question, you'll respond with an educated guess. Remember only respond with an integer between 1 and 4 that corresponds to the answer."},
-                {'type': 'image_url', 'image_url': {'url': question}}
+                {
+                    'type': 'text', 
+                    'text': "You are a helpful assistant specialized in answering multiple-choice questions who only responds with the button number corresponding to the most likely answer do not respond with words only a integer. You'll do this even if the question involves content you can't analyze, such as videos or images. If you cannot answer the question, you'll respond with an educated guess. Remember only respond with an integer between 1 and 4 that corresponds to the answer."
+                },
+                {
+                    'type': 'image_url', 
+                    'image_url': {'url': question}
+                }
             ]
             }
         ]
